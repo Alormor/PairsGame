@@ -8,10 +8,10 @@ body{
 
 #cards {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
     justify-items: center;
-    max-width: 600px; /* ancho total del tablero */
-    margin: 20px auto; /* centrado horizontal */
+    max-width: 600px; /* board's total width */
+    margin: 20px auto; /* horizontal center */
 }
 
 .divImage {
@@ -24,9 +24,9 @@ body{
 }
 
 .divImage img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* se ajusta sin recortar */
+    width: 100px;
+    height: 100px;
+    object-fit: fill; 
     border-radius: 6px;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -35,3 +35,4 @@ body{
 .divImage img:hover {
     transform: scale(1.05);
 }
+

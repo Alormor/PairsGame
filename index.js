@@ -32,18 +32,17 @@ let arrayCards = [
 
 let currentGame = [];
 let revealedCards = [];
-let secs = 60, mins = 2;
-let timer, intervalTimer, myMessage, myCards;
+let secs = 6, mins = 0;
+let timer, intervalTimer, myMessage, myCards, canClick = true;
 
 function beginPairsGame(){
     timer = document.getElementById("timer");
     myMessage = document.getElementById("message");
     myCards = document.getElementById("cards");
     let myTries = document.getElementById("tries");
-    let canClick = true;
     let cardsUp = 0;
     let card1, card2;
-    let tries = 5;
+    let tries = 1;
 
 
     generateCards(); // Generate the cards
@@ -89,11 +88,8 @@ function beginPairsGame(){
                                 card2.src = "images/backside.png";
                                 canClick = true;
                             }, 1000);
-                            setTimeout(()=>{
-                                if(tries == 0){
-                                    lose();
-                                }
-                            },1100)
+                            if(tries == 0){
+                            setTimeout(lose,1100)}
                         }
                     }else{
                         canClick = true;
@@ -182,9 +178,7 @@ function showCard(card){
 function lose(){
     canClick = false;
     myMessage.innerHTML = "You've lost :(";
-    currentGame.forEach(card => {
-        let myImg = document.getElementById(card);
-        myImg.src = "images/"+card.charAt(3)+".png";
-    });
+    let myImgs = document.getElementsByClassName("image")
+    Array.from(myImgs).forEach((curImg)=>{curImg.src = showCard(curImg);})
     clearInterval(intervalTimer);
 }
