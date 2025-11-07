@@ -5,16 +5,33 @@ body{
     font-family: "Trebuchet MS", sans-serif;
     text-align: center;
 }
-div#cards{
-    align-items: center;
+
+#cards {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+    justify-items: center;
+    max-width: 600px; /* ancho total del tablero */
+    margin: 20px auto; /* centrado horizontal */
 }
 
-img{
+.divImage {
     width: 100px;
     height: 100px;
-    margin-right: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.divImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* se ajusta sin recortar */
+    border-radius: 6px;
     cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.divImage img:hover {
+    transform: scale(1.05);
 }

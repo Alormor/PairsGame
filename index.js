@@ -55,6 +55,7 @@ function beginPairsGame(){
     generateImg(currentGame); // Generate the images on the page
     myTries.innerHTML = "You have tries "+tries+" left.";
 
+    // Change hte logic from id names to custom attribute plus array check in new branch
     myCards.addEventListener("click", (e)=>{        
         if(e.target.className == "image"){
         if(!intervalTimer) 
