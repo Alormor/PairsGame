@@ -72,7 +72,7 @@ function beginPairsGame(){
                             myMessage.innerHTML = "Correct";
                             cardsUp = 0;
                             canClick = true;
-                            revealedCards.push(card1.nameType);
+                            revealedCards.push(card1.nameType); // Saves only one card's nameType, both cards of the pair have the same
                             if(revealedCards.length == (currentGame.length/2)){
                                 myMessage.innerHTML = "Congratulations, you've guessed them all correct!";
                                 clearInterval(intervalTimer);
@@ -104,6 +104,7 @@ function beginPairsGame(){
     })
 }
 
+// Function that generate the cards tha will be displayed
 function generateCards(){
     for(let i=0; i<5; i++){
         currentGame.push(arrayCards[i]);
@@ -111,6 +112,7 @@ function generateCards(){
     }
 }
 
+// Function that shuffles the contents of the array where the cards are kept
 function shuffle(array) {
     let currentIndex = array.length;
     
@@ -130,6 +132,7 @@ function shuffle(array) {
     return array;
 }
 
+// Function that generates the divs and imgs where the cards will be stored
 function generateImg(array){
     array.forEach((card) => {
         let div = document.createElement("div");
@@ -146,6 +149,7 @@ function generateImg(array){
     })
 }
 
+// Function that starts the timer
 function startTimer(){
     if(secs == 0) secs=60;
     if(secs == 60) mins--;
@@ -156,6 +160,8 @@ function startTimer(){
     if(mins == 0 && secs == 0) lose();
 }
 
+// Function that checks if a pair has already been permanently revealed so you it 
+// can't be clicked on again
 function checkRevealedCards(revealedCards, card){
     let revealed = false;
     for(let i=0; i<revealedCards.length && !revealed; i++){
@@ -166,10 +172,13 @@ function checkRevealedCards(revealedCards, card){
     return revealed
 }
 
+// Function that flips the card
 function showCard(card){
     return "images/"+card.nameType+".png";
 }
 
+// Function that stops that game, reveals all cards and tells the player
+// they've lost
 function lose(){
     canClick = false;
     myMessage.innerHTML = "You've lost :(";
