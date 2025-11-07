@@ -25,14 +25,10 @@ let pairUpper = [
     "MOOSHKA", "GRINDLE", "DAUGHTER", "LACE",
     "GARMOND", "NUU", "PHANTOM", "TROBBIO"
 ]*/
-let pairLower = [
-    "apple", "banana", "watermelon", "orange", "cherry"
-]
 
-let pairUpper = [
-    "APPLE", "BANANA", "WATERMELON", "ORANGE", "CHERRY"
+let arrayCards = [
+    0, 1, 2, 3, 4
 ]
-
 
 let currentGame = [];
 let revealedCards = [];
@@ -110,8 +106,8 @@ function beginPairsGame(){
 
 function generateCards(){
     for(let i=0; i<5; i++){
-        currentGame.push(pairLower[i]);
-        currentGame.push(pairUpper[i]);
+        currentGame.push(arrayCards[i]);
+        currentGame.push(arrayCards[i]);
     }
 }
 
