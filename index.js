@@ -56,8 +56,8 @@ function beginPairsGame(){
         if(e.target.className == "image"){
         if(!intervalTimer) 
             intervalTimer = setInterval(startTimer, 1000); // Timer
-            if(canClick){ // Condition that checks
-                if(!checkRevealedCards(revealedCards, e.target.id.toLowerCase())){
+            if(canClick){ // Condition that checks if you can click on the cards
+                if(!checkRevealedCards(revealedCards, e.target.nameType)){
                     canClick = false
                     cardsUp++;
                     if(cardsUp==1){
@@ -68,11 +68,11 @@ function beginPairsGame(){
                         card2 = e.target;
                         card2.src = showCard(card2);
 
-                        if(card1.id.toLowerCase()==card2.id.toLowerCase()){
+                        if(card1.nameType==card2.nameType){
                             myMessage.innerHTML = "Correct";
                             cardsUp = 0;
                             canClick = true;
-                            revealedCards.push(card1.id);
+                            revealedCards.push(card1.nameType);
                             if(revealedCards.length == (currentGame.length/2)){
                                 myMessage.innerHTML = "Congratulations, you've guessed them all correct!";
                                 clearInterval(intervalTimer);
@@ -137,7 +137,8 @@ function generateImg(array){
 
         let img = document.createElement("img");
         img.src = "images/backside.png";
-        img.id = card;
+        img.id = "img"+card;
+        img.nameType = card;
         img.className = "image";
         
         let myDiv = myCards.appendChild(div);
@@ -158,7 +159,7 @@ function startTimer(){
 function checkRevealedCards(revealedCards, card){
     let revealed = false;
     for(let i=0; i<revealedCards.length && !revealed; i++){
-        revealed = revealedCards[i].toLowerCase()==card?
+        revealed = revealedCards[i] == card?
         true:false;
     }
 
@@ -166,7 +167,7 @@ function checkRevealedCards(revealedCards, card){
 }
 
 function showCard(card){
-    return "images/"+card.id+".png";
+    return "images/"+card.nameType+".png";
 }
 
 function lose(){
@@ -174,7 +175,7 @@ function lose(){
     myMessage.innerHTML = "You've lost :(";
     currentGame.forEach(card => {
         let myImg = document.getElementById(card);
-        myImg.src = "images/"+card+".png";
+        myImg.src = "images/"+card.charAt(3)+".png";
     });
     clearInterval(intervalTimer);
 }
