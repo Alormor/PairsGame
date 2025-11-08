@@ -1,38 +1,74 @@
-body{
+body {
     background-color: lightblue;
     font-size: 25px;
     color: white;
     font-family: "Trebuchet MS", sans-serif;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, p {
+    margin: 10px 0;
 }
 
 #cards {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns */
-    justify-items: center;
-    max-width: 600px; /* board's total width */
-    margin: 20px auto; /* horizontal center */
-}
-
-.divImage {
-    width: 100px;
-    height: 100px;
-    display: flex;
+display: grid;
+    grid-template-columns: repeat(5, 120px);
+    grid-template-rows: repeat(2, 120px);
+    gap: 15px;
     justify-content: center;
-    align-items: center;
+    margin: 20px 0;
+}
+
+/* Card container */
+.divImage {
+    width: 120px;
+    height: 120px;
+    perspective: 800px;
+}
+
+/* Lower part that rotates */
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+/* Both cards */
+.flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
+    backface-visibility: hidden;
+    overflow: hidden;
 }
 
-.divImage img {
-    width: 100px;
-    height: 100px;
-    object-fit: fill; 
-    border-radius: 6px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+/* Front and back cards */
+.flip-front {
+    transform: rotateY(0deg);
 }
 
-.divImage img:hover {
-    transform: scale(1.05);
+.flip-back {
+transform: rotateY(180deg);
 }
 
+/* Flip effect */
+.flipped .flip-inner {
+transform: rotateY(180deg);
+}
+
+/* Images */
+.flip-front img, .flip-back img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+border-radius: 8px;
+cursor: pointer;
+}

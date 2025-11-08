@@ -32,7 +32,7 @@ let arrayCards = [
 
 let currentGame = [];
 let revealedCards = [];
-let secs = 6, mins = 0;
+let secs = 0, mins = 1;
 let timer, intervalTimer, myMessage, myCards, canClick = true;
 
 function beginPairsGame(){
@@ -42,7 +42,7 @@ function beginPairsGame(){
     let myTries = document.getElementById("tries");
     let cardsUp = 0;
     let card1, card2;
-    let tries = 1;
+    let tries = 5;
 
 
     generateCards(); // Generate the cards
@@ -52,7 +52,7 @@ function beginPairsGame(){
 
     // Change hte logic from id names to custom attribute plus array check in new branch
     myCards.addEventListener("click", (e)=>{        
-        if(e.target.className == "image"){
+        if(e.target.classList.contains("image")){
         if(!intervalTimer) 
             intervalTimer = setInterval(startTimer, 1000); // Timer
             if(canClick){ // Condition that checks if you can click on the cards
@@ -61,11 +61,11 @@ function beginPairsGame(){
                     cardsUp++;
                     if(cardsUp==1){
                         card1 = e.target;
-                        card1.src = showCard(card1);
+                        card1.closest(".divImage").classList.add("flipped");
                         canClick = true;
                     }else if(card1 != e.target){
                         card2 = e.target;
-                        card2.src = showCard(card2);
+                        card2.closest(".divImage").classList.add("flipped");
 
                         if(card1.nameType==card2.nameType){
                             myMessage.innerHTML = "Correct";
@@ -81,11 +81,11 @@ function beginPairsGame(){
                             cardsUp = 0;
                             tries--
                             myTries.innerHTML = tries !=0? "You have tries "+tries+" left.":
-                            "You don't have more tires left";
+                            "You don't have more tries left";
                             setTimeout(()=>{
                                 myMessage.innerHTML="Try again";
-                                card1.src = "images/backside.png";
-                                card2.src = "images/backside.png";
+                                card1.closest(".divImage").classList.remove("flipped");
+                                card2.closest(".divImage").classList.remove("flipped");
                                 canClick = true;
                             }, 1000);
                             if(tries == 0){
@@ -134,14 +134,32 @@ function generateImg(array){
         let div = document.createElement("div");
         div.className = "divImage";
 
-        let img = document.createElement("img");
-        img.src = "images/backside.png";
-        img.id = "img"+card;
-        img.nameType = card;
-        img.className = "image";
-        
-        let myDiv = myCards.appendChild(div);
-        myDiv.appendChild(img);
+        let inner = document.createElement("div");
+        inner.className = "flip-inner";
+
+        // Front = backside
+        let front = document.createElement("div");
+        front.className = "flip-front";
+
+        // Back = card's image
+        let back = document.createElement("div");
+        back.className = "flip-back";
+
+        let imgBackside = document.createElement("img");
+        imgBackside.src = "images/backside.png";
+        imgBackside.className = "back-img image";
+        imgBackside.nameType = card;
+
+        let imgCard = document.createElement("img");
+        imgCard.src = "images/"+card+".png";
+        imgCard.className = "front-img";
+
+        front.appendChild(imgBackside);
+        back.appendChild(imgCard);
+        inner.appendChild(front);
+        inner.appendChild(back);
+        div.appendChild(inner);
+        myCards.appendChild(div);
     })
 }
 
