@@ -14,18 +14,6 @@ window.onload = ()=>{
     beginPairsGame()
 }
 
-/*let pairLower = [
-    "hornet", "maiden", "sherma", "shakra",
-    "mooshka", "grindle", "daughter", "lace", 
-    "garmond", "nuu", "phantom", "trobbio"
-]
-
-let pairUpper = [
-    "HORNET", "MAIDEN", "SHERMA", "SHAKRA",
-    "MOOSHKA", "GRINDLE", "DAUGHTER", "LACE",
-    "GARMOND", "NUU", "PHANTOM", "TROBBIO"
-]*/
-
 let arrayCards = [
     0, 1, 2, 3, 4
 ]
@@ -34,7 +22,7 @@ let currentGame = [];
 let revealedCards = [];
 let secs = 0, mins = 1;
 let timer, intervalTimer, myMessage, myCards, canClick = true;
-
+let counterCard = 0;
 function beginPairsGame(){
     timer = document.getElementById("timer");
     myMessage = document.getElementById("message");
@@ -56,7 +44,7 @@ function beginPairsGame(){
         if(!intervalTimer) 
             intervalTimer = setInterval(startTimer, 1000); // Timer
             if(canClick){ // Condition that checks if you can click on the cards
-                if(!checkRevealedCards(revealedCards, e.target.nameType)){
+                if(!checkRevealedCards(revealedCards, e.target.id)){
                     canClick = false
                     cardsUp++;
                     if(cardsUp==1){
@@ -71,8 +59,9 @@ function beginPairsGame(){
                             myMessage.innerHTML = "Correct";
                             cardsUp = 0;
                             canClick = true;
-                            revealedCards.push(card1.nameType); // Saves only one card's nameType, both cards of the pair have the same
-                            if(revealedCards.length == (currentGame.length/2)){
+                            revealedCards.push(card1.id);
+                            revealedCards.push(card2.id);
+                            if(revealedCards.length == (currentGame.length)){
                                 myMessage.innerHTML = "Congratulations, you've guessed them all correct!";
                                 clearInterval(intervalTimer);
                             }
@@ -106,6 +95,9 @@ function generateCards(){
         currentGame.push(arrayCards[i]);
         currentGame.push(arrayCards[i]);
     }
+    let last = Math.floor(Math.random()*4);
+    currentGame.push(last);
+    currentGame.push(last);
 }
 
 // Function that shuffles the contents of the array where the cards are kept
@@ -131,6 +123,7 @@ function shuffle(array) {
 // Function that generates the divs and imgs where the cards will be stored
 function generateImg(array){
     array.forEach((card) => {
+        counterCard++;
         let div = document.createElement("div");
         div.className = "divImage";
 
@@ -149,6 +142,7 @@ function generateImg(array){
         imgBackside.src = "images/backside.png";
         imgBackside.className = "back-img image";
         imgBackside.nameType = card;
+        imgBackside.id = card+""+counterCard;
 
         let imgCard = document.createElement("img");
         imgCard.src = "images/"+card+".png";
