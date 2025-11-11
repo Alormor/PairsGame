@@ -1,10 +1,4 @@
 # PAIRS GAME
-Coding a JavaScript memory matching game or pairs game is another 
-fun project you can build for fun (and for your portfolio!).
+Memory matching game with a 3x4 board. There are 6 possible pairs chosen from 5 different cards (there's always one repeat). The positions on the board are randomly assigned.
 
-The logic of the game is simple:
-
-There are a given number of cards on the table facing down. The player 
-needs to find all the pairs. However, you may want to add more difficulty 
-by limiting the number of guesses or by setting a time limit for the game 
-to be finished.
+Difficulty is handled with limited time and tries. You can reset the game after you are done, independently of your result.
