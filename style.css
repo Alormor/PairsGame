@@ -29,6 +29,7 @@ display: grid;
     width: 120px;
     height: 120px;
     perspective: 800px;
+    position: relative;
 }
 
 /* Lower part that rotates */
@@ -56,19 +57,31 @@ display: grid;
 }
 
 .flip-back {
-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 /* Flip effect */
 .flipped .flip-inner {
-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 /* Images */
 .flip-front img, .flip-back img {
-width: 100%;
-height: 100%;
-object-fit: contain;
-border-radius: 8px;
-cursor: pointer;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button{
+    position: relative;
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: darkslateblue;
+    background-color: coral;
+    margin-top: 140px;
+    border-style: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
